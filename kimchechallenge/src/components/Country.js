@@ -59,7 +59,7 @@ const Country = ({...props}) => {
               let spokenLanguages = c.languages.map(l => l.name);
               let aux = spokenLanguages.find(l => l === prop );
               if (aux !== undefined) return c;
-              return undefined
+              return undefined;
             })
         }})
       return result;
@@ -104,6 +104,9 @@ const Country = ({...props}) => {
                 <Center>
                   <StyledCountry>
                     <h3>{country.emoji}  {country.name}</h3>
+                    <span><b>Capital:</b> {country.capital}</span>
+                    <br/>
+                    <span><b>Currency:</b> {country.currency}</span>
                   </StyledCountry>
                 </Center>
                 : null
