@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.464c0418.css",
+    "main.js": "/static/js/main.b7d55ce3.js",
+    "static/media/Poppins.woff": "/static/media/Poppins.44ee791225ad38f902ac.woff",
+    "static/media/Poppins.woff2": "/static/media/Poppins.7a1a8382f2aaee82171c.woff2",
+    "index.html": "/index.html",
+    "main.464c0418.css.map": "/static/css/main.464c0418.css.map",
+    "main.b7d55ce3.js.map": "/static/js/main.b7d55ce3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.464c0418.css",
+    "static/js/main.b7d55ce3.js"
+  ]
+}
