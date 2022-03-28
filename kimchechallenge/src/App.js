@@ -1,22 +1,44 @@
 import React from "react";
-import "./App.css";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
+import GlobalFonts from './fonts/fonts';
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import Country from './components/Country'
+import Button from './components/Button'
+import Container from './components/Container'
+import ButtonContainer from "./components/ButtonContainer";
+import { Formik, Form, Field} from 'formik'
+import { useState } from 'react'
 
 const client = new ApolloClient({
-  uri: "https://48p1r2roz4.sse.codesandbox.io",
+  uri: "https://countries.trevorblades.com/",
+  cache: new InMemoryCache()
 });
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <div>
-      <h2>
-        My first Apollo app{" "}
-        <span role="img" aria-label="Rocket">
-          🚀
-        </span>
-      </h2>
-    </div>
-  </ApolloProvider>
-);
+const App = () => {
+  const [searchString, setSearchString] = useState('')
+  const [filter, setFilter] = useState(true);
+
+  return (
+    <ApolloProvider client={client}>
+      <Container>
+      <GlobalFonts />
+        <h1>Country search</h1>
+        <span>Search countries (case sensitive)</span>
+      <Formik
+        initialValues={{search: ''}}
+        onSubmit = { values => setSearchString(values.search) }
+      >
+        <Form>
+          <Field name='search'/>
+        </Form>
+      </Formik>
+        <ButtonContainer>
+          <h3>Group by:</h3>
+          <Button filter={!filter} onClick={ () => setFilter(false) }> Continent</Button>
+          <Button filter={filter} onClick={ () => setFilter(true) }> Language</Button>
+        </ButtonContainer>
+      <Country search={searchString} filter={filter}/>
+      </Container>
+    </ApolloProvider>
+  )
+};
 export default App;
