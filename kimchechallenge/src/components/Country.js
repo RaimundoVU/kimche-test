@@ -36,7 +36,6 @@ const Country = ({...props}) => {
     if (!loading) {
       let countries = data.countries;
       countries.forEach( country => {
-        console.log(country)
         if ( country.name.includes(search) ) filtered.push(country)
       } )
     }
@@ -65,11 +64,20 @@ const Country = ({...props}) => {
       return result;
     }
     else if ( !filter ) {
-      //arr.forEach( (country) => {
-        //let { continent } =  country;
-        //result = {...result, [continent.name]: [...countries, country]}
-        //countries = [];
-      //}) 
+      let propertyMap = []
+      arr.forEach((country) => {
+        let { continent } = country;
+        propertyMap.push(continent.name)
+      })
+      propertyMap = new Set(propertyMap);
+      propertyMap.forEach((prop) => {
+        result = {...result, [prop]: 
+          arr.map((c) => {
+            let { continent } = c;
+            if ( continent.name == prop ) return c
+          })
+        }
+      })
     }
     return result;
   }
@@ -99,7 +107,6 @@ const Country = ({...props}) => {
                 : null
               )}
             </>
-
           )
       })
       }
