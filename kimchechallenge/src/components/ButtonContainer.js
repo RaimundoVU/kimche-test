@@ -7,6 +7,7 @@ const ButtonContainer = styled.div`
   max-width: 600px;
   padding: 5px;
   align-items: center;
+
 `
 
 export default ButtonContainer;

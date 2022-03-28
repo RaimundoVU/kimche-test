@@ -1,14 +1,14 @@
 import styled from 'styled-components'
-import { ApolloProvider , useQuery} from "@apollo/client";
+import { useQuery} from "@apollo/client";
 import { GET_COUNTRIES } from "../utilities/queries";
 
 
 const StyledCountry = styled.article`
   display: inline-block;
   padding: 5px;
-  width: 250px;
+  width: 225px;
   transition: box-shadow 0.2s ease;
-  margin: 40px 10px 0 10px;
+  margin: 10px 5px 10px 0;
   background-color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -23,7 +23,7 @@ const Container = styled.div`
 const Center = styled.div`
   column-count: 3;
   background-color: #eee;
-  width: 1000px;
+  width: 225px;
 `
 
 const Country = ({...props}) => {

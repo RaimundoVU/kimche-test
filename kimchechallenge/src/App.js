@@ -22,7 +22,7 @@ const App = () => {
       <Container>
       <GlobalFonts />
         <h1>Country search</h1>
-        <span> Some random text</span>
+        <span>Search countries (case sensitive)</span>
       <Formik
         initialValues={{search: ''}}
         onSubmit = { values => setSearchString(values.search) }
@@ -32,7 +32,7 @@ const App = () => {
         </Form>
       </Formik>
         <ButtonContainer>
-          <h4>Group by:</h4>
+          <h3>Group by:</h3>
           <Button filter={!filter} onClick={ () => setFilter(false) }> Continent</Button>
           <Button filter={filter} onClick={ () => setFilter(true) }> Language</Button>
         </ButtonContainer>
