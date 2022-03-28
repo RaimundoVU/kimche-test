@@ -31,7 +31,7 @@ const Country = ({...props}) => {
   const { search, filter } = props;
 
   const filterCountries = () => {
-    if (search == '') return [];
+    if (search === '') return [];
     let filtered = [];
     if (!loading) {
       let countries = data.countries;
@@ -43,7 +43,7 @@ const Country = ({...props}) => {
   }
 
   const groupByProperty = (arr, filter) => {
-    if (search == '') return [];
+    if (search === '') return [];
     let result = {};
     if ( filter ) {
       let propertyMap = []
@@ -57,8 +57,9 @@ const Country = ({...props}) => {
           result = {...result, [prop]: 
             arr.map((c) => {
               let spokenLanguages = c.languages.map(l => l.name);
-              let aux = spokenLanguages.find(l => l == prop );
+              let aux = spokenLanguages.find(l => l === prop );
               if (aux !== undefined) return c;
+              return undefined;
             })
         }})
       return result;
@@ -74,7 +75,8 @@ const Country = ({...props}) => {
         result = {...result, [prop]: 
           arr.map((c) => {
             let { continent } = c;
-            if ( continent.name == prop ) return c
+            if ( continent.name === prop ) return c
+            return undefined;
           })
         }
       })
@@ -102,6 +104,9 @@ const Country = ({...props}) => {
                 <Center>
                   <StyledCountry>
                     <h3>{country.emoji}  {country.name}</h3>
+                    <span><b>Capital:</b> {country.capital}</span>
+                    <br/>
+                    <span><b>Currency:</b> {country.currency}</span>
                   </StyledCountry>
                 </Center>
                 : null

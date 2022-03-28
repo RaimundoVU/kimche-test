@@ -1,7 +1,17 @@
+
 # Desafío para Software Engineers
 
-Nombre postulante: [TU NOMBRE]
-Link a la app en producción: [LINK DEL DEPLOY]
+Nombre postulante: Raimundo Vásquez Urdanivia
+Link a la app en producción: https://incomparable-duckanoo-05b96d.netlify.app/
+
+##Pregunta abierta
+
+**Pregunta** 
+"La tabla que contiene la información correspondiente a la asistencia diaria de un niño en un colegio tiene 90 millones de filas. Todas las tablas del sistema existen en la misma BDD en MySQL. La lógica del backend que actualiza la información correspondiente al pasar la asistencia tiene un tiempo de servicio p95 de 10 segundos. El equipo está interesado en bajar este tiempo para mejorar la experiencia del usuario (y porque nos gusta pensar en Kimche como un Ferrari). ¿Qué propondrías para enfrentar el problema? Esta pregunta es abierta, no hay respuestas malas. Puedes proponer arquitectura, tecnologías, diseño, etc."
+
+**Respuesta**
+
+Una de las opciones que existen, sin conocer a mayor profundidad los atributos de la tabla, es normalizar la base de datos, para que no exista redundancia con las asistencias. Otra manera de reducir los tiempos es añadir una tecnología de cache, de forma que el acceso a los datos del alumno sea mas rapida, como por ejemplo usar Redis, en la cual se almacenaría clave/valor, donde la clave seria un id representativo del alumno, y el valor seria un arreglo con las asistencias.
 
 ## Instrucciones
 
