@@ -15,22 +15,23 @@ const StyledCountry = styled.article`
   border: solid 1px;
 `
 const Container = styled.div`
-  display: flex;
+  display: block;
   background-color: #eee;
-  justify-content: center;
+  justify-content: left;
 `
 
 const Center = styled.div`
   column-count: 3;
+  background-color: #eee;
   width: 1000px;
 `
 
 const Country = ({...props}) => {
-  const { loading, error, data} = useQuery(GET_COUNTRIES)
-  const { search } = props;
+  const { loading, error, data } = useQuery(GET_COUNTRIES)
+  const { search, filter } = props;
 
   const filterCountries = () => {
-    console.log('search', search)
+    if (search == '') return [];
     let filtered = [];
     if (!loading) {
       let countries = data.countries;
@@ -42,24 +43,67 @@ const Country = ({...props}) => {
     return filtered; 
   }
 
+  const groupByProperty = (arr, filter) => {
+    if (search == '') return [];
+    let result = {};
+    if ( filter ) {
+      let propertyMap = []
+      arr.forEach((country) => {
+        let { languages } = country;
+        languages.forEach((language) => propertyMap.push(language.name))
+        })
+        propertyMap = new Set(propertyMap);
+        propertyMap.forEach((prop) => {
+          console.log(prop)
+          result = {...result, [prop]: 
+            arr.map((c) => {
+              let spokenLanguages = c.languages.map(l => l.name);
+              let aux = spokenLanguages.find(l => l == prop );
+              if (aux !== undefined) return c;
+            })
+        }})
+      return result;
+    }
+    else if ( !filter ) {
+      //arr.forEach( (country) => {
+        //let { continent } =  country;
+        //result = {...result, [continent.name]: [...countries, country]}
+        //countries = [];
+      //}) 
+    }
+    return result;
+  }
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   let filteredCountries = filterCountries();
-  console.log('filtrados')
-  console.log(filteredCountries)
+  let groupedCountries = groupByProperty(filteredCountries, filter);
   return (
-    <>
-      { filteredCountries.map( country =>   
-      <Container>
-        <Center>
-          <StyledCountry>
-            <h3>{country.emoji}  {country.name}</h3>
-          </StyledCountry>
-        </Center>
-      </Container>
-      )}
-    </>
+    <Container>
+      {
+        Object.keys(groupedCountries).map((obj,i) => {
+          console.log(obj,i)
+          console.log(groupedCountries)
+          return (
+            <>
+              <h2>{obj}</h2>
+              {groupedCountries[obj].map( country =>
+                country !== undefined 
+                ? 
+                <Center>
+                  <StyledCountry>
+                    <h3>{country.emoji}  {country.name}</h3>
+                  </StyledCountry>
+                </Center>
+                : null
+              )}
+            </>
+
+          )
+      })
+      }
+    </Container>
   )
 }
 
