@@ -55,6 +55,9 @@ const Country = ({...props}) => {
         <Center>
           <StyledCountry>
             <h3>{country.emoji}  {country.name}</h3>
+            <span> <b>Capital:</b> {country.capital}</span>
+            <br />
+            <span> <b>Currency:</b> {country.currency}</span>
           </StyledCountry>
         </Center>
       </Container>
